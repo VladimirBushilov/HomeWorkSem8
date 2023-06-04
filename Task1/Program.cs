@@ -7,7 +7,15 @@
 // 7 4 2 1
 // 9 5 3 2
 // 8 4 4 2
+
+int ReadInt(string text)
+{
+    System.Console.Write(text);
+    return Convert.ToInt32(Console.ReadLine());
+}
+
 int[,] FillMatrix(int row, int col, int leftRange, int rightRange)
+
 {
     int[,] matrix = new int[row, col];
     Random rand = new Random();
@@ -35,24 +43,28 @@ void PrintMatrix(int[,] matrix)
     }
 }
 
-void ColumnsMeanValue(int[,] matrix)
+void SortRow(int[,] matrix)
 {
-    double columnsum = 0;
-    System.Console.WriteLine("Среднее арифметическое каждого столбца: ");
-    for (int j = 0; j < matrix.GetLength(1); j++)
+    for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        for (int i = 0; i < matrix.GetLength(0); i++)
+
+        for (int j = 0; j < matrix.GetLength(1) - 1; j++)
         {
-            columnsum = columnsum + matrix[i, j];
+            for (int k = 0; k < matrix.GetLength(1) - j - 1; k++)
+                if (matrix[i,k] < matrix[i,k + 1])
+                {
+                    int temp = matrix[i,k];
+                    matrix[i,k] = matrix[i,k + 1];
+                    matrix[i,k + 1] = temp;
+                }
         }
-        System.Console.Write($"{Math.Round(columnsum / matrix.GetLength(1), 1)}" + "; ");
-        columnsum = 0;
     }
 
 }
 
-int[,] matrix = FillMatrix(6, 6, 0, 20);
-System.Console.WriteLine();
+int[,] matrix = FillMatrix(ReadInt("Введите количество строк: "), ReadInt("Введите количество столбцов: "), 0, 20);
 PrintMatrix(matrix);
-// System.Console.WriteLine();
-ColumnsMeanValue(matrix);
+System.Console.WriteLine();
+SortRow(matrix);
+System.Console.WriteLine ("Матрица с упорядоченными элементами по убыванию:");
+PrintMatrix (matrix);
