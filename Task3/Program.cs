@@ -6,6 +6,13 @@
 // 18 20
 // 15 18
 
+int ReadInt(string text)
+{
+    System.Console.WriteLine(text);
+    return Convert.ToInt32(Console.ReadLine());
+}
+
+
 int[,] FillMatrix(int row, int col, int leftRange, int rightRange)
 {
     int[,] matrix = new int[row, col];
@@ -51,12 +58,6 @@ int[,] MatrixMultiply(int[,] matrix1, int[,] matrix2)
 return MatrixMultiplied;
 }
 
-int ReadInt(string text)
-{
-    System.Console.WriteLine(text);
-    return Convert.ToInt32(Console.ReadLine());
-}
-
 int row1 = ReadInt("Введите количество строк матрицы 1");
 int col1 = ReadInt("Введите количество столбцов матрицы 1");
 int row2 = ReadInt("Введите количество строк матрицы 2");
@@ -76,5 +77,5 @@ if (col1 == row2)
 }
 else
 {
-    System.Console.WriteLine("Для умножения матриц количество столбцов матрицы 1 должно быть равно количеству строк матрицы 2");
+    System.Console.WriteLine("Производная заданных матриц невозможна");
 }
