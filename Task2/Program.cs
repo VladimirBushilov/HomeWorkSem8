@@ -6,6 +6,12 @@
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
+int ReadInt(string text)
+{
+    System.Console.Write(text);
+    return Convert.ToInt32(Console.ReadLine());
+}
+
 int[,] FillMatrix(int row, int col, int leftRange, int rightRange)
 {
     int[,] matrix = new int[row, col];
@@ -63,7 +69,7 @@ void RowSum(int[,] matrix)
 
 }
 
-int[,] matrix = FillMatrix(5, 4, 0, 10);
+int[,] matrix = FillMatrix(ReadInt("Введите количество строк: "), ReadInt("Введите количество столбцов: "), 0, 20);
 System.Console.WriteLine();
 PrintMatrix(matrix);
 System.Console.WriteLine();
