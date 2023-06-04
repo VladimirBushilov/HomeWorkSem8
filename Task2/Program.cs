@@ -6,16 +6,7 @@
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
-int ReadInt(string text)
-{
-    System.Console.Write(text);
-    return Convert.ToInt32(Console.ReadLine());
-}
-
-
 int[,] FillMatrix(int row, int col, int leftRange, int rightRange)
-
-
 {
     int[,] matrix = new int[row, col];
     Random rand = new Random();
@@ -43,28 +34,37 @@ void PrintMatrix(int[,] matrix)
     }
 }
 
-void SortRow(int[,] matrix)
+void RowSum(int[,] matrix)
 {
+    int sum = 0;
+    int max = 0;
+    int pos = 0;
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
-
-        for (int j = 0; j < matrix.GetLength(1) - 1; j++)
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            for (int k = 0; k < matrix.GetLength(1) - j - 1; k++)
-                if (matrix[i, k] < matrix[i, k + 1])
-                {
-                    int temp = matrix[i, k];
-                    matrix[i, k] = matrix[i, k + 1];
-                    matrix[i, k + 1] = temp;
-                }
+            max = max + matrix[i, j];
         }
     }
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            sum = sum + matrix[i, j];
+        }
+        if (sum < max)
+        {
+            max = sum;
+            pos = i + 1;
+        }
+        sum = 0;
+    }
+    System.Console.WriteLine($"Строка с наименьшей суммой элементов: {pos} строка");
 
 }
 
-int[,] matrix = FillMatrix(ReadInt("Введите количество строк: "), ReadInt("Введите количество столбцов: "), 0, 20);
+int[,] matrix = FillMatrix(5, 4, 0, 10);
+System.Console.WriteLine();
 PrintMatrix(matrix);
 System.Console.WriteLine();
-SortRow(matrix);
-System.Console.WriteLine("Матрица с упорядоченными элементами по убыванию:");
-PrintMatrix(matrix);
+RowSum(matrix);
